@@ -19,6 +19,7 @@ public class Room implements Showable{
 				Date newDeparture = newReservation.getDepartureDate();
 				
 			}
+	
 		}
 		
 		this.reservations.put(newReservation.getID(), newReservation);
