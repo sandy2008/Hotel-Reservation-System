@@ -27,14 +27,14 @@ public class Date implements Comparable<Date> {
 			String[] parts = date.split("\\.");
 			
 			if (parts.length != 3) {
-				throw new DateFormatException("Kein g¨¹ltiges Datumsformat");
+				throw new DateFormatException("Format Wrong");
 			}
 			
 			try {
 				this.fullDate = Integer.parseInt(parts[0]) + Integer.parseInt(parts[1]) * 100 + Integer.parseInt(parts[2]) * 10000;
 			}
 			catch (NumberFormatException e) {
-				throw new DateFormatException("Kein g¨¹ltiges Datumsformat");
+				throw new DateFormatException("Format Wrong");
 			}
 			
 			this.check();

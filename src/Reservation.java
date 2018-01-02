@@ -18,7 +18,7 @@ public class Reservation implements Showable{
 	 * @param	reservableObject		{@link ReservableObject} this <code>Reservation</code> is linked to
 	 */
 	
-	public Reservation(Date arrival, Date departure, int persons, Room room)  {
+	public Reservation(Date arrival, Date departure, int persons, Room room)throws ReservationException  {
 		this.arrival = arrival;
 		this.departure = departure;
 		this.persons = persons;
@@ -28,7 +28,7 @@ public class Reservation implements Showable{
 		this.room.addReservation(this);
 	}
 	
-	public Reservation(Date arrival, int nights, int persons, Room room) {
+	public Reservation(Date arrival, int nights, int persons, Room room) throws ReservationException {
 		this(arrival, arrival.getFollowingDate(nights), persons, room);
 	}
 	public UUID getID() {
