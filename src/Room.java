@@ -100,7 +100,6 @@ public class Room implements Showable{
 		System.out.println("Name: " + this.getName());
 		System.out.println("Price: " + this.getBasePrice());
 		System.out.println("BedNumber: " + this.getbedNumber());
-		printReservationInformation();
 	}
 	
 }

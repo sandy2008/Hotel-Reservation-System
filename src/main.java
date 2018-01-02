@@ -3,9 +3,12 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class main {
+	private static final boolean True = false;
+
 	public static void main(String[] args) {
 		Date arrivalDate = null;
 		String roomTypeString;
+
 		int nights = 0;
 		int persons = 0;
 		
@@ -22,24 +25,26 @@ public class main {
 				
 		}));
 		
-		
 		System.out.println("1. User UI Reserve");
 		System.out.println("2. User UI Search");
 		System.out.println("3. Admin UI Add");
 		System.out.println("4. Admin UI Show");
-		System.out.println("5. Admin UI CheckIn/Out");
+		System.out.println("5. Admin UI CheckIn");
+		System.out.println("6. Admin UI CheckOut");
 		System.out.println("-------------------------------------------------");
 		
 		System.out.print("Input Function.\n > ");
+
 		
 		try (Scanner scanner = new Scanner(System.in)) {
-
-			if(Integer.parseInt(scanner.nextLine())== 1){
+			while(true) {
+				int select = Integer.parseInt(scanner.nextLine());
+			if(select == 1){
 			System.out.println("Welcome to User Reservation System");
 			
-			System.out.println("Input Room Type (Single/Double/Family).\n > ");
+			System.out.print("Input Room Type (Single/Double/Family).\n > ");
 			roomTypeString = scanner.nextLine();
-			
+
 			System.out.print("Input Checkin Date.\n > ");
 			arrivalDate = new Date(scanner.nextLine());
 			
@@ -49,17 +54,102 @@ public class main {
 			System.out.print("Input Person Number.\n > ");
 			persons = Integer.parseInt(scanner.nextLine()) - 1;
 			
-			for (Room SingleRoom: rooms) {
-				if(SingleRoom instanceof SingleRoom) {
-				showObjects(new Reservation(arrivalDate, nights, persons, SingleRoom));
-				showObjects(SingleRoom);
+			for (Room Room: rooms) {
+				if(roomTypeString.equals("Single") ) {
+				if(Room instanceof SingleRoom) {
+				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+				showObjects(new Reservation(arrivalDate, nights, persons, Room));
+				break;
+				}
 				}
 			}
-			
+				
+				if(roomTypeString.equals("Double") ) {
+				if(Room instanceof DoubleRoom) {
+				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+				showObjects(new Reservation(arrivalDate, nights, persons, Room));
+				break;
+				}
+				}
+			}
+				
+				if(roomTypeString.equals("Family") ) {
+				if(Room instanceof FamilyRoom) {
+				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+				showObjects(new Reservation(arrivalDate, nights, persons, Room));
+				break;
+				}
+				}
+			}
+				
+			}
+
 			}
 			
+			else if(select== 2){
+			System.out.println("Welcome to User Search System");
+			
+			System.out.print("Input Room Type (Single/Double/Family).\n > ");
+			roomTypeString = scanner.nextLine();
+
+			System.out.print("Input Checkin Date.\n > ");
+			arrivalDate = new Date(scanner.nextLine());
+			
+			System.out.print("Input Nights.\n > ");
+			nights = Integer.parseInt(scanner.nextLine()) - 1;
+			
+			System.out.print("Input Person Number.\n > ");
+			persons = Integer.parseInt(scanner.nextLine()) - 1;
+			
+			for (Room Room: rooms) {
+				if(roomTypeString.equals("Single") ) {
+				if(Room instanceof SingleRoom) {
+				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+				System.out.println("Empty!");
+				break;
+				}
+				}
+			}
+				
+				if(roomTypeString.equals("Double") ) {
+				if(Room instanceof DoubleRoom) {
+				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+				System.out.println("Empty!");
+				break;
+				}
+				}
+			}
+				
+				if(roomTypeString.equals("Family") ) {
+				if(Room instanceof FamilyRoom) {
+				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+				System.out.println("Empty!");
+				break;
+				}
+				}
+			}
+				
+			}
+
+			}
 			System.out.println("-------------------------------------------------");
-		
+			
+			System.out.println("continue?");
+			if(Integer.parseInt(scanner.nextLine())==1) {
+				System.out.println("1. User UI Reserve");
+				System.out.println("2. User UI Search");
+				System.out.println("3. Admin UI Add");
+				System.out.println("4. Admin UI Show");
+				System.out.println("5. Admin UI CheckIn");
+				System.out.println("6. Admin UI CheckOut");
+				System.out.println("-------------------------------------------------");
+				
+				System.out.print("Input Function.\n > ");
+			}
+			else
+				System.exit(1);
+				
+		}
 		}
 		
 		catch (DateFormatException | ReservationException | NumberFormatException e) {

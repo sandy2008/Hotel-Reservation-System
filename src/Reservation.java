@@ -78,6 +78,7 @@ public class Reservation implements Showable{
 		System.out.println("Departure: " + this.getDepartureDate());
 		System.out.println("Night: " + this.getNights());
 		System.out.println("Person: " + this.getPersons());
+		System.out.println("Room Type:" + room.getClass().getName());
 	
 	}
 	public String getInformation() {
