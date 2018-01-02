@@ -8,10 +8,11 @@ public class main {
 	public static void main(String[] args) {
 		Date arrivalDate = null;
 		String roomTypeString;
-
+		String name;
+		
 		int nights = 0;
 		int persons = 0;
-		
+		int price = 0;
 		System.out.println("--------------------------------------");
 		System.out.println("Ubume Hotel Reservation System V0.2");
 		System.out.println("Souce Code:https://github.com/sandy2008/HotelReservationSystem");
@@ -38,99 +39,139 @@ public class main {
 		
 		try (Scanner scanner = new Scanner(System.in)) {
 			while(true) {
+					
 				int select = Integer.parseInt(scanner.nextLine());
-			if(select == 1){
-			System.out.println("Welcome to User Reservation System");
+				if(select == 1){ //User Reservation
+					System.out.println("Welcome to User Reservation System");
 			
-			System.out.print("Input Room Type (Single/Double/Family).\n > ");
-			roomTypeString = scanner.nextLine();
+					System.out.print("Input Room Type (Single/Double/Family).\n > ");
+					roomTypeString = scanner.nextLine();
 
-			System.out.print("Input Checkin Date.\n > ");
-			arrivalDate = new Date(scanner.nextLine());
+					System.out.print("Input Checkin Date.\n > ");
+					arrivalDate = new Date(scanner.nextLine());
 			
-			System.out.print("Input Nights.\n > ");
-			nights = Integer.parseInt(scanner.nextLine()) - 1;
+					System.out.print("Input Nights.\n > ");
+					nights = Integer.parseInt(scanner.nextLine()) - 1;
 			
-			System.out.print("Input Person Number.\n > ");
-			persons = Integer.parseInt(scanner.nextLine()) - 1;
+					System.out.print("Input Person Number.\n > ");
+					persons = Integer.parseInt(scanner.nextLine()) - 1;
 			
-			for (Room Room: rooms) {
+					for (Room Room: rooms) {
+						if(roomTypeString.equals("Single") ) {
+							if(Room instanceof SingleRoom) {
+								if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+									showObjects(new Reservation(arrivalDate, nights, persons, Room));
+									break;
+								}
+							}
+						}
+				
+						if(roomTypeString.equals("Double") ) {
+							if(Room instanceof DoubleRoom) {
+								if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+									showObjects(new Reservation(arrivalDate, nights, persons, Room));
+									break;	
+								}
+							}
+						}
+				
+						if(roomTypeString.equals("Family") ) {
+							if(Room instanceof FamilyRoom) {
+								if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+									showObjects(new Reservation(arrivalDate, nights, persons, Room));
+									break;
+								}
+							}
+						}
+				
+					}
+
+				}
+			
+			else if(select== 2){//User Search System
+				System.out.println("Welcome to User Search System");
+			
+				System.out.print("Input Room Type (Single/Double/Family).\n > ");
+				roomTypeString = scanner.nextLine();
+
+				System.out.print("Input Checkin Date.\n > ");
+				arrivalDate = new Date(scanner.nextLine());
+			
+				System.out.print("Input Nights.\n > ");
+				nights = Integer.parseInt(scanner.nextLine()) - 1;
+			
+				System.out.print("Input Person Number.\n > ");
+				persons = Integer.parseInt(scanner.nextLine()) - 1;
+			
+				for (Room Room: rooms) {
+					if(roomTypeString.equals("Single") ) {
+						if(Room instanceof SingleRoom) {
+							if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+								System.out.println("Empty!");
+								break;
+							}
+						}
+					}
+				
+					if(roomTypeString.equals("Double") ) {
+						if(Room instanceof DoubleRoom) {
+							if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+								System.out.println("Empty!");
+								break;
+							}
+						}
+					}
+				
+					if(roomTypeString.equals("Family") ) {
+						if(Room instanceof FamilyRoom) {
+							if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
+								System.out.println("Empty!");
+								break;
+							}
+						}
+					}
+				
+				}
+
+			}
+			else if(select== 3){//Admin Add System
+				System.out.println("Welcome to Admin Add-Room System");
+			
+				System.out.print("Input Room Name.\n > ");
+				name = scanner.nextLine();
+				
+				System.out.print("Input Room Type (Single/Double/Family).\n > ");
+				roomTypeString = scanner.nextLine();
+
+				System.out.print("Input Base Price.\n > ");
+				price = Integer.parseInt(scanner.nextLine());
+			
+				System.out.print("Input Bed Number.\n > ");
+				persons = Integer.parseInt(scanner.nextLine()) - 1;
+				
 				if(roomTypeString.equals("Single") ) {
-				if(Room instanceof SingleRoom) {
-				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
-				showObjects(new Reservation(arrivalDate, nights, persons, Room));
-				break;
+					rooms.add(new SingleRoom(name, price, persons));
+					System.out.println("Added");
 				}
-				}
-			}
-				
+			
 				if(roomTypeString.equals("Double") ) {
-				if(Room instanceof DoubleRoom) {
-				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
-				showObjects(new Reservation(arrivalDate, nights, persons, Room));
-				break;
+					rooms.add(new DoubleRoom(name, price, persons));
+					System.out.println("Added");
 				}
-				}
-			}
-				
+			
 				if(roomTypeString.equals("Family") ) {
-				if(Room instanceof FamilyRoom) {
-				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
-				showObjects(new Reservation(arrivalDate, nights, persons, Room));
-				break;
+					rooms.add(new FamilyRoom(name, price, persons));
+					System.out.println("Added");
 				}
-				}
-			}
+				
 				
 			}
-
-			}
-			
-			else if(select== 2){
-			System.out.println("Welcome to User Search System");
-			
-			System.out.print("Input Room Type (Single/Double/Family).\n > ");
-			roomTypeString = scanner.nextLine();
-
-			System.out.print("Input Checkin Date.\n > ");
-			arrivalDate = new Date(scanner.nextLine());
-			
-			System.out.print("Input Nights.\n > ");
-			nights = Integer.parseInt(scanner.nextLine()) - 1;
-			
-			System.out.print("Input Person Number.\n > ");
-			persons = Integer.parseInt(scanner.nextLine()) - 1;
-			
-			for (Room Room: rooms) {
-				if(roomTypeString.equals("Single") ) {
-				if(Room instanceof SingleRoom) {
-				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
-				System.out.println("Empty!");
-				break;
+			else if(select== 4){//Admin Show System
+				for (Room Room:rooms){
+					showObjects(Room);
 				}
-				}
-			}
 				
-				if(roomTypeString.equals("Double") ) {
-				if(Room instanceof DoubleRoom) {
-				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
-				System.out.println("Empty!");
-				break;
-				}
-				}
-			}
 				
-				if(roomTypeString.equals("Family") ) {
-				if(Room instanceof FamilyRoom) {
-				if(Room.checkVacancy(arrivalDate, arrivalDate.getFollowingDate(nights))== true){
-				System.out.println("Empty!");
-				break;
-				}
-				}
-			}
-				
-			}
-
 			}
 			System.out.println("-------------------------------------------------");
 			
