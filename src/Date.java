@@ -40,7 +40,7 @@ public class Date implements Comparable<Date> {
 			this.check();
 		}
 		else {
-			throw new DateFormatException("Kein g¨¹ltiges Datumsformat");
+			throw new DateFormatException("Format Wrong");
 		}
 	}
 	
@@ -96,15 +96,15 @@ public class Date implements Comparable<Date> {
 		int year = this.getYear();
 		
 		if ((year) < 1) {
-			throw new DateFormatException("Ung¨¹ltiges Jahr");
+			throw new DateFormatException("Wrong Year");
 		}
 		
 		if ((month < 1) || (month > 12)) {
-			throw new DateFormatException("Ung¨¹ltiger Monat");
+			throw new DateFormatException("Wrong Month");
 		}
 		
 		if (day > Date.getDaysForMonth(month, year)) {
-			throw new DateFormatException("Ung¨¹ltiger Tag");
+			throw new DateFormatException("Wrong Tag");
 		}
 	}
 	
@@ -184,7 +184,7 @@ public class Date implements Comparable<Date> {
 			}
 			
 			if (year < 1) {
-				throw new DateFormatException("Ergebnis-Jahr der Berechnung ist keine g¨¹ltige Jahreszahl");
+				throw new DateFormatException("Bad Year");
 			}
 		}
 		
@@ -203,7 +203,7 @@ public class Date implements Comparable<Date> {
 		int daysDiff = 0;
 		
 		if (this.compareTo(secondDate) > 0) {
-			throw new DateFormatException("Erstes Datum muss vor zweitem Datum liegen");
+			throw new DateFormatException("Illegal Date");
 		}
 		
 		while (!this.equals(secondDate)) {
@@ -300,11 +300,11 @@ public class Date implements Comparable<Date> {
 	 */
 	public static int getDaysForMonth(int month, int year) throws DateFormatException {
 		if ((month < 1) || (month > 12)) {
-			throw new DateFormatException("Ung¨¹ltiger Monat");
+			throw new DateFormatException("Bad Month");
 		}
 		
 		if (year < 1) {
-			throw new DateFormatException("Ung¨¹ltiges Jahr");
+			throw new DateFormatException("Bad Year");
 		}
 		
 		return Date.MONTH_MAX_DAYS[month - 1] - (((month == 2) && !Date.isLeapYear(year)) ? 1 : 0);
@@ -318,7 +318,7 @@ public class Date implements Comparable<Date> {
 	 */
 	public static boolean isLeapYear(int year) throws DateFormatException {
 		if (year < 1) {
-			throw new DateFormatException("Ung¨¹ltiges Jahr");
+			throw new DateFormatException("Leap Year");
 		}
 		
 		return (((year % 400) == 0) || (((year % 4) == 0) && ((year % 100) != 0)));
