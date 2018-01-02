@@ -33,6 +33,7 @@ public class main {
 		System.out.println("4. Admin UI Show");
 		System.out.println("5. Admin UI CheckIn");
 		System.out.println("6. Admin UI CheckOut");
+		System.out.println("7. Cancel Room");
 		System.out.println("-------------------------------------------------");
 		
 		System.out.print("Input Function.\n > ");
@@ -192,6 +193,17 @@ public class main {
 				for (Room Room:rooms){
 					if(name.equals(Room.getName()))
 						 Room.printReservationInformation();
+				}
+				
+				
+			}
+				
+			else if(select== 7){//Admin CheckIn System
+				System.out.println("Input UUID >");
+				UUID code = UUID.fromString(scanner.nextLine());
+				for (Room Room:rooms){
+					if(Room.checkUUID(code))
+						Room.cancelReservation(Room.getReservation(code));;
 				}
 				
 				

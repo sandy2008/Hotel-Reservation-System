@@ -47,7 +47,6 @@ public class Room implements Showable{
 	}
 	
 	public boolean checkUUID(UUID code) {
-		
 		Set<UUID> ids = this.reservations.keySet();
 		
 		for (UUID id: ids) {
@@ -57,11 +56,33 @@ public class Room implements Showable{
 		
 		return false;
 	}
+	
+	public Reservation getReservation(UUID code) {
+		Set<UUID> ids = this.reservations.keySet();
+		
+		for (UUID id: ids) {
+			if(id.equals(code))
+				return this.reservations.get(code);
+		}
+		
+		return null;
+	}
+
+	
 	public Room(String name, double basePrice, int bedNumber) {
 		this.setName(name);
 		this.setBasePrice(basePrice);
 		this.setbedNumber(bedNumber);
 	}
+	
+	void cancelReservation(Reservation reservation) throws ReservationException {
+		if (!this.reservations.containsKey(reservation.getID())) {
+			throw new ReservationException("No Such Reservation.");
+		}
+		
+		this.reservations.remove(reservation.getID());
+	}
+	
 	public void setName(String name) {
 		if (name.equals("")) {
 			throw new IllegalArgumentException("Name cannot be empty.");

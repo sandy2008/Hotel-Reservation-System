@@ -53,6 +53,9 @@ public class Reservation implements Showable{
 		return this.departure;
 	}
 	
+	public void cancel() throws ReservationException {
+		this.room.cancelReservation(this);
+	}
 	/**
 	 * Gets the nights to sleep over of this <code>Reservation</code>.
 	 * 
