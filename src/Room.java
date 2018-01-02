@@ -45,6 +45,18 @@ public class Room implements Showable{
 		return true;
 
 	}
+	
+	public boolean checkUUID(UUID code) {
+		
+		Set<UUID> ids = this.reservations.keySet();
+		
+		for (UUID id: ids) {
+			if(id.equals(code))
+				return true;
+		}
+		
+		return false;
+	}
 	public Room(String name, double basePrice, int bedNumber) {
 		this.setName(name);
 		this.setBasePrice(basePrice);
@@ -101,5 +113,6 @@ public class Room implements Showable{
 		System.out.println("Price: " + this.getBasePrice());
 		System.out.println("BedNumber: " + this.getbedNumber());
 	}
+	
 	
 }

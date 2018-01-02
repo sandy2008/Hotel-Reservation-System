@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.Vector;
 
 public class main {
@@ -173,6 +174,29 @@ public class main {
 				
 				
 			}
+				
+			else if(select== 5){//Admin CheckIn System
+				System.out.println("Input UUID >");
+				UUID code = UUID.fromString(scanner.nextLine());
+				for (Room Room:rooms){
+					if(Room.checkUUID(code))
+						showObjects(Room);
+				}
+				
+				
+			}
+				
+			else if(select== 6){//Admin CheckIn System
+				System.out.println("Input Room Name >");
+				name=scanner.nextLine();
+				for (Room Room:rooms){
+					if(name.equals(Room.getName()))
+						 Room.printReservationInformation();
+				}
+				
+				
+			}
+				
 			System.out.println("-------------------------------------------------");
 			
 			System.out.println("continue?");

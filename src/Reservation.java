@@ -82,6 +82,6 @@ public class Reservation implements Showable{
 	
 	}
 	public String getInformation() {
-		return "Reservation in " + this.room.getName() + " arrive in " + this.arrival + " departs in  " + this.departure + ".";
+		return "Reservation in " + this.room.getName() + " arrive in " + this.arrival + " departs in " + this.departure + ". Money is" + this.nights * room.getBasePrice()+"JPY in total";
 	}
 }
