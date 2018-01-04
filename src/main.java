@@ -15,7 +15,7 @@ public class main {
 		int persons = 0;
 		int price = 0;
 		System.out.println("--------------------------------------");
-		System.out.println("Ubume Hotel Reservation System V0.2");
+		System.out.println("Komatsumaru Hotel Reservation System V0.3");
 		System.out.println("Souce Code:https://github.com/sandy2008/HotelReservationSystem");
 		System.out.println("--------------------------------------");
 		
@@ -34,6 +34,7 @@ public class main {
 		System.out.println("5. Admin UI CheckIn");
 		System.out.println("6. Admin UI CheckOut");
 		System.out.println("7. Cancel Room");
+		System.out.println("8. Exit");
 		System.out.println("-------------------------------------------------");
 		
 		System.out.print("Input Function.\n > ");
@@ -49,14 +50,14 @@ public class main {
 					System.out.print("Input Room Type (Single/Double/Family).\n > ");
 					roomTypeString = scanner.nextLine();
 
-					System.out.print("Input Checkin Date.\n > ");
+					System.out.print("Input Checkin Date.(31.1.1995) \n > ");
 					arrivalDate = new Date(scanner.nextLine());
 			
 					System.out.print("Input Nights.\n > ");
 					nights = Integer.parseInt(scanner.nextLine()) - 1;
 			
 					System.out.print("Input Person Number.\n > ");
-					persons = Integer.parseInt(scanner.nextLine()) - 1;
+					persons = Integer.parseInt(scanner.nextLine());
 			
 					for (Room Room: rooms) {
 						if(roomTypeString.equals("Single") ) {
@@ -96,14 +97,14 @@ public class main {
 				System.out.print("Input Room Type (Single/Double/Family).\n > ");
 				roomTypeString = scanner.nextLine();
 
-				System.out.print("Input Checkin Date.\n > ");
+				System.out.print("Input Checkin Date.(31.1.1995) \n > ");
 				arrivalDate = new Date(scanner.nextLine());
 			
 				System.out.print("Input Nights.\n > ");
 				nights = Integer.parseInt(scanner.nextLine()) - 1;
 			
 				System.out.print("Input Person Number.\n > ");
-				persons = Integer.parseInt(scanner.nextLine()) - 1;
+				persons = Integer.parseInt(scanner.nextLine()); //#3 fixed
 			
 				for (Room Room: rooms) {
 					if(roomTypeString.equals("Single") ) {
@@ -208,10 +209,13 @@ public class main {
 				
 				
 			}
+			
+			else if(select == 8)
+				System.exit(0);
 				
 			System.out.println("-------------------------------------------------");
 			
-			System.out.println("continue?");
+			System.out.println("input 1 to continue >");
 			if(Integer.parseInt(scanner.nextLine())==1) {
 				System.out.println("1. User UI Reserve");
 				System.out.println("2. User UI Search");
@@ -219,6 +223,8 @@ public class main {
 				System.out.println("4. Admin UI Show");
 				System.out.println("5. Admin UI CheckIn");
 				System.out.println("6. Admin UI CheckOut");
+				System.out.println("7. Cancel Room");
+				System.out.println("8. Exit");
 				System.out.println("-------------------------------------------------");
 				
 				System.out.print("Input Function.\n > ");
